@@ -23,7 +23,7 @@ function extract3(){
      
          
     //      try{let ptagstate3 = document.getElementById('state_loader')
-    //   ptagstate3.textContent = 'Are you TechNifyied?'
+    //   ptagstate3.textContent = 'Are you Logical?'
     //   let ldata2 = document.getElementById('ldata')
     //   ldata2.classList.add('checked')}catch{}
     //   try{
@@ -46,7 +46,7 @@ function extract3(){
 
    
          try{let ptagstate3 = document.getElementById('state_loader')
-      ptagstate3.textContent = 'Are you TechNifyied?'
+      ptagstate3.textContent = 'Are you Logical?'
       let ldata2 = document.getElementById('ldata')
       ldata2.classList.add('checked')}catch{}
       try{
@@ -128,7 +128,7 @@ refreshBtn3.style.opacity='0.5'
 
 
       let ptagstate3 = document.getElementById('state_loader')
-      ptagstate3.textContent = 'Are you TechNifyied?'
+      ptagstate3.textContent = 'Are you Logical?'
       let ldata2 = document.getElementById('ldata')
       ldata2.classList.add('checked')
       let loader = document.querySelector('.loading-container')
@@ -4013,7 +4013,7 @@ function getproducts_2_3(update_=true) {
   // alert('fetching')
   storeInfo('late2', 'busy')
   let ptagstate = document.getElementById('state_loader')
-  ptagstate.textContent = 'Fetching TechNify Data...'
+  ptagstate.textContent = 'Fetching LogicalSolutions Data...'
   let fdata__ = document.getElementById('fdata__')
   fdata__.classList.remove('hide_bx')
   fetch(line + '/products', {
@@ -4079,7 +4079,7 @@ function getproducts_2_3(update_=true) {
       //remove the loader
 
       try{let ptagstate3 = document.getElementById('state_loader')
-      ptagstate3.textContent = 'Are you TechNifyied?'
+      ptagstate3.textContent = 'Are you Logical?'
       let ldata2 = document.getElementById('ldata')
       ldata2.classList.add('checked')}catch{}
       try{
@@ -4282,7 +4282,7 @@ function getproducts_2_3(update_=true) {
 
           console.log(`something went wrong :${error}`)
          try{let ptagstate3 = document.getElementById('state_loader')
-      ptagstate3.textContent = 'Are you TechNifyied?'
+      ptagstate3.textContent = 'Are you Logical?'
       let ldata2 = document.getElementById('ldata')
       ldata2.classList.add('checked')}catch{}
       try{
