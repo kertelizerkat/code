@@ -26,6 +26,11 @@ window.addEventListener('DOMContentLoaded',()=>{
     
     }
 })
+
+  if (!localStorage.getItem("theme_+-----")){
+    localStorage.setItem("theme_+-----","Dark")
+  
+  }
 let line="https://sculpin-charming-directly.ngrok-free.app"
 // line="http://localhost:5700"
 // let theme_m=''
