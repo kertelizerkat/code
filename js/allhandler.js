@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     }
 })
 let line="https://sculpin-charming-directly.ngrok-free.app"
-line="http://localhost:5700"
+// line="http://localhost:5700"
 // let theme_m=''
 // localStorage.setItem('theme_+-----', theme_m)
 let access_="domaContent"
@@ -36,7 +36,7 @@ let cpath = window.location.pathname;
 let bpath;
 if (line=='https://sculpin-charming-directly.ngrok-free.app'){
   // bpath='https://tpredictions.online'
-  bpath='https://github.com/logicalSolutions-inc/code'
+  bpath='https://logicalsolutions-inc.github.io/code/'
 }else{
 
 }
