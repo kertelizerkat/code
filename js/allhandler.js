@@ -27,13 +27,15 @@ window.addEventListener('DOMContentLoaded',()=>{
     }
 })
 let line="https://sculpin-charming-directly.ngrok-free.app"
-// line="http://localhost:5700"
+line="http://localhost:5700"
 // let theme_m=''
 // localStorage.setItem('theme_+-----', theme_m)
 let access_="domaContent"
 let online=false
 let cpath = window.location.pathname;
 let bpath;
+let kl;
+let indh="index.html";
 if (line=='https://sculpin-charming-directly.ngrok-free.app'){
   // bpath='https://tpredictions.online'
   bpath='https://logicalsolutions-inc.github.io/code'
@@ -46,7 +48,7 @@ if (line=='https://sculpin-charming-directly.ngrok-free.app'){
 
 let pp=localStorage.getItem('Freeprev_path')
 if (pp){}else{
-  pp=`${getHomePath()}/Logged/posts/index.html`
+  pp=`${getHomePath()}/Logged/posts/${indh}`
 }
 let k2=cpath.split('/')
    
@@ -87,7 +89,7 @@ if ((k2=='Logged'|| k2=='profile') || (k9=='Logged'|| k9=='profile'  )){
 
 if(pp==cpath){
   let homepath= getHomePath()
-  localStorage.setItem('Freeprev_path',`${homepath}/index.html`)
+  localStorage.setItem('Freeprev_path',`${homepath}/${indh}`)
   localStorage.setItem('typeOfPath','Return to Home')
 
 }
@@ -127,7 +129,7 @@ if (k2=='profile' ){
 
 if(!localStorage.getItem('Freeprev_path')){
   let homepath= getHomePath()
-  localStorage.setItem('Freeprev_path',`${homepath}/index.html`)
+  localStorage.setItem('Freeprev_path',`${homepath}/${indh}`)
   localStorage.setItem('typeOfPath','Return to Home')
 }
 
@@ -135,7 +137,7 @@ if(!localStorage.getItem('Freeprev_path')){
 
 
 function getHomePath(){
-  basePath= window.location.pathname.split('/')
+       basePath= window.location.pathname.split('/')
 
        let npath=''
        if (line=='https://sculpin-charming-directly.ngrok-free.app'){
@@ -150,6 +152,8 @@ function getHomePath(){
           }
       }
        }
+
+   
        
     return npath.replace("index.html","")
 }
@@ -201,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if(nn=='profile' || nn=='Logged'){
           let homepath= getHomePath()
-          localStorage.setItem('Freeprev_path',`${homepath}/index.html`)
+          localStorage.setItem('Freeprev_path',`${homepath}/${indh}`)
           localStorage.setItem('typeOfPath','Return to Home ')
 
         }
@@ -726,7 +730,7 @@ setInterval(check,5000)
   // The function that checks window.innerWidth and toggles the conte
 
 function register(){
-     window.location.assign(`${getHomePath()}/register/index.html`)
+     window.location.assign(`${getHomePath()}/register/${indh}`)
   }
 
 

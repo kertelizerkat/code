@@ -102,12 +102,23 @@ function validateForm() {
            
               const us=data['username']
               const em=data['email']
+
+             
+              
+
               storeInfo(en('password',date1),ps)
               storeInfo(en('phone',date1),p)
               storeInfo(en('username',date1),us)
               storeInfo(en('email',date1),em)
               storeInfo(en('logged',date1),'true')
-
+              const ad=data['Address']
+              const bi=data['Bio']
+              const web=data['website']
+               storeInfo(en('Address',date1),ad)
+                storeInfo(en('Bio',date1),bi)
+                 storeInfo(en('website',date1),web)
+             
+              alert(data)
 
               const c_btn = document.getElementById('btn_l')
               c_btn.classList.remove('load')
