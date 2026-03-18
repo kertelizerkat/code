@@ -118,7 +118,7 @@ function validateForm() {
                 storeInfo(en('Bio',date1),bi)
                  storeInfo(en('website',date1),web)
              
-              alert(data)
+            
 
               const c_btn = document.getElementById('btn_l')
               c_btn.classList.remove('load')
