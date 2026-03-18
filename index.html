@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en" >
+   
+<head> 
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical Solutions | Main</title>
+    <script src="js/mod.js"></script>
+    <script src="js/allhandler.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <script src="js/taiwan.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="sources/IMG.jpg" type="image/x-icon">
+</head>
+
+<body style="max-width:100vw;height:100vh;">
+    
+     <div id='mainloader' class="loading-container11">
+        <div class="title11">
+            <span class="letter11"></span>
+          <span class=""><img style="height:50px;width:50px; border-radius: 50%;display: inline;" src="sources/IMG.jpg"></span>
+
+        
+   
+      
+        </div>
+        <div class="loader11"></div>
+        <div id="username_loader11" class="subtitle11">Welcome</div>
+        <div id="state_loader11" class="subtitle11"></div>
+
+        <div class="checkbox-container11">
+          <!-- <div id="vdata" class="check-box  hide_bx11">Validation</div> -->
+          <!-- <div id="fdata__" class="check-box  hide_bx11">Fetching Data</div> -->
+          <!-- <div id="ldata" class="check-box  hide_bx11">Loading Data</div> -->
+        </div>
+        <div class="particles11">
+          <div class="particle11" style="left: 10%; animation-delay: 0s;"></div>
+          <div class="particle11" style="left: 25%; animation-delay: 0.8s;"></div>
+          <div class="particle11" style="left: 40%; animation-delay: 1.6s;"></div>
+          <div class="particle11" style="left: 60%; animation-delay: 2.4s;"></div>
+          <div class="particle11" style="left: 80%; animation-delay: 3.2s;"></div>
+          <div class="particle11" style="left: 95%; animation-delay: 4s;"></div>
+        </div>
+
+    </div>
+      
+    <!-- Header -->
+   <header class="flex ">
+      <div class="logo flex items-center gap-3 animate-fade-in-down">
+        <div class="logo_img ">
+          <img id="iconm" style="border-radius: 50%;width:50px;height:50px" src="sources/IMG.jpg" alt="">
+        </div>
+        <div class="logo_name" id='usname'style="text-transform: uppercase;">Logical</div>
+      </div>
+      <nav>
+        <ul class="">
+          <li><a href="#"class="active_ anc"   id="Dashboard" >Main</a></li>
+      
+          <li><a href="Logged/posts/index.html" class="anc"  id="BTS" >Trends</a></li>
+          <li style="margin-right: 20px;"><a id="ll1" class="anc" style="color:white" href="login/index.html">Login</a></li>
+        </ul>
+        <button id="menu-btn" class="fixed top-7 right-4 z-50 flex flex-col gap-1">
+          <div class="w-6 h-0.5 bg-black transition-all duration-300" id="bar1"></div>
+          <div class="w-6 h-0.5 bg-black transition-all duration-300" id="bar2"></div>
+          <div class="w-6 h-0.5 bg-black transition-all duration-300" id="bar3"></div>
+        </button>
+
+        <!-- Overlay -->
+        <div id="overlay"
+          class="fixed inset-0 bg-white/60 backdrop-blur-md z-40 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out">
+        </div>
+
+        <div id="side-menu"
+          class="fixed top-0 right-0 w-80 h-full bg-white bg-opacity-80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border-l border-white/50 z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col p-6 gap-6">
+          <div class="flex justify-between items-center">
+
+            <h2 id="hmen" class="text-2xl font-extrabold text-gray-900 whitec"><img
+                style="height:50px;width:50px; border-radius: 50%;display: inline;" src="sources/IMG.jpg">
+              </h2>
+            <button id="close-btn" class="text-2xl font-bold text-gray-500 hover:text-gray-900 whitec">×</button>
+          </div>
+          <a href="#" id='ot3'
+            class="flex items-center gap-2 text-lg text-gray-700 hover:text-indigo-600 transition-all duration-200 whitec">
+            🏠 <span >Main</span>
+          </a>
+         
+          <a href="Logged/posts/index.html"
+            class="flex items-center gap-2 text-lg text-gray-700 hover:text-indigo-600 transition-all duration-200 whitec">
+            📈 <span>Trends</span>
+          </a>
+          
+          <a href="login/index.html" id="ll2" 
+            class="flex items-center gap-2 text-lg text-gray-700 hover:text-indigo-600 transition-all duration-200 whitec">
+            🚪 <span id='ot4'>Login</span>
+          </a>
+        </div>
+        <script>
+          if (true){
+              const stylesheet =document.getElementById("menu-btn");
+                  stylesheet.innerHTML=` <div class="w-6 h-0.5 bg-white transition-all duration-300" id="bar1"></div>
+              <div class="w-6 h-0.5 bg-white transition-all duration-300" id="bar2"></div>
+              <div class="w-6 h-0.5 bg-white transition-all duration-300" id="bar3"></div>`
+
+              document.getElementById('overlay').setAttribute('class','fixed inset-0 bg-black/60 backdrop-blur-md z-40 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out')
+              document.getElementById('hmen').setAttribute('class','text-2xl font-extrabold text-white-900')
+              
+              document.getElementById('side-menu').setAttribute('class','fixed top-0 right-0 w-80 h-full bg-black bg-opacity-70 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.1)] border-l border-white/50 z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col p-6 gap-6')
+
+               document.querySelectorAll('.whitec').forEach(element =>{
+                element.setAttribute('class','flex items-center gap-2 text-lg text-white-700 hover:text-indigo-600 transition-all duration-200 whitec')
+              })
+
+
+          }
+        </script>
+      </nav>
+
+
+    </header>
+
+  
+    
+
+    <div class="smoother">
+      <div class="line"></div>
+    </div>
+    
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <video class="hero-bg-video" autoplay muted loop playsinline poster="sources/IMG.jpg">
+          <source src="../../v12.mp4" type="video/mp4">
+          <!-- Fallback image if video not supported -->
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content animate__animated animate__fadeInDown" data-aos="fade-up">
+          <h1 class="hero-title animate__animated animate__fadeInDown" data-aos="fade-up">Master <span>Python & Web Development</span></h1>
+          <p class="hero-desc animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="200">Struggling with programming? Let's code together.</p>
+        
+          <a href="#cta" class="cta-btn animate__animated animate__pulse animate__infinite" data-aos="zoom-in" data-aos-delay="400">Get Started Now</a>
+        </div>
+      </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Programs</h2>
+                <p>Choose from three specialized tracks to boost your coding skills.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Advanced Python</h3>
+                    <p>Master problem-solving with Python. In-depth breakdown of concepts. R500/month. Sat & Sun 6-8pm.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Web Development Basics</h3>
+                    <p>Learn HTML, CSS, JavaScript from scratch. Build responsive websites. R300/month. Sat & Sun 10am-12pm.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Integration: Python + Web</h3>
+                    <p>Combine backend logic with frontend presentation. Present outputs intuitively. R400/month. Sat & Sun 9-11pm.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Personalized Tutoring</h3>
+                    <p>One-on-one attention via Zoom. Lessons tailored to your pace and goals.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Flexible Schedule</h3>
+                    <p>Sessions on Saturdays and Sundays at multiple time slots to fit your availability.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Affordable Pricing</h3>
+                    <p>Monthly packages starting at R300. Pay only for the program you need.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>Your Learning Journey</h2>
+                <p>Simple steps to start coding with us.</p>
+            </div>
+            
+            <div class="process">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Choose Your Program</h3>
+                        <p>Select from Python, Web Development, or Integrated track based on your goals.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Register & Pay</h3>
+                        <p>Contact us to secure your spot. Monthly fees as listed, with easy payment options.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Join Zoom Session</h3>
+                        <p>Receive the meeting link and join at your scheduled time (Sat/Sun).</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Learn & Practice</h3>
+                        <p>Interactive coding sessions with real-time feedback and hands-on exercises.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Build Projects</h3>
+                        <p>Apply skills to real-world projects and improve your coding intuition.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Details (formerly Limitations) -->
+    <section class="limitations" id="limitations">
+        <div class="container">
+            <div class="section-header">
+                <h2>Program Details</h2>
+                <p>Detailed information about our tutoring programs.</p>
+            </div>
+            
+            <div class="limitations-grid">
+                <div class="limitation-card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Python Problem-Solving</h3>
+                    <p>Advanced concepts, in-depth breakdown. Saturdays & Sundays 6pm-8pm. R500/month.</p>
+                </div>
+                
+                <div class="limitation-card">
+                    <h3><i class="fas fa-database"></i> Web Development Basics</h3>
+                    <p>HTML, CSS, JavaScript. Build your first websites. Saturdays & Sundays 10am-12pm. R300/month.</p>
+                </div>
+                
+                <div class="limitation-card">
+                    <h3><i class="fas fa-user-friends"></i> Integration: Python + Web</h3>
+                    <p>Combine backend and frontend for intuitive outputs. Saturdays & Sundays 9pm-11pm. R400/month.</p>
+                </div>
+                
+                <div class="limitation-card">
+                    <h3><i class="fas fa-cloud-sun"></i> All Sessions Online</h3>
+                    <p>Held via Zoom. Easy access from anywhere. Recordings available upon request.</p>
+                </div>
+                
+                <div class="limitation-card">
+                    <h3><i class="fas fa-lock"></i> Contact Us</h3>
+                    <p>Cell: 062 962 0814<br>Email: technify.u.me@gmail.com<br>Website: LogicalSolutions.org</p>
+                </div>
+                
+                <div class="limitation-card">
+                    <h3><i class="fas fa-chart-bar"></i> Why Learn With Us?</h3>
+                    <p>Personalized attention, practical projects, and flexible scheduling to fit your lifestyle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div id="cta_main" class="container">
+            <div id='ctac' class="cta-content cta-content2">
+                <h2>Ready to Start Coding?</h2>
+                 <div class="code-snippet-module">
+
+            <div class="code-window">
+            
+            <div class="header">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+            <div class="file">learning.py</div>
+            </div>
+
+            <pre></pre>
+
+            </div>
+            </div>
+                       
+                            
+                <div class="hero-buttons">
+                    <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdNx6GA_LMThp69IltO4u0_0z2lObsLjx5Wnxlp6VYi3LQjpQ/viewform?usp=dialog" id='tbtn'class="btn btn-primary">Register</a>
+                    <a href="#" id="dbtn" class="btn btn-outline hide">Request Demo</a>
+                </div>
+                
+            </div>
+
+             
+                  <div id="demoss" class="container33 hide ">
+
+        <div class="holder">
+          <div id="cencon" class="container-bts">
+            <div class="form">
+              <div class="cap"><img
+                style="height:50px;width:50px; border-radius: 50%;display: inline;" src="favicon.ico">LogicalSolutions <span id="M"></span><span id="T"></span><span id="E"></span></div>
+              <label id='label33' for="input">Match: <input id="input" placeholder="liverpool vs chealsea" type="text" minlength="4"/></label>
+              <button class="btn btn33" onclick="predict()" >submit</button>
+             
+             
+            </div>
+          </div>
+          
+          <div>
+            <div class="output"></div>
+            <div class="progress-container hide">
+        <div class="progress-bar" id="progress-bar">50%</div>
+    </div>
+    <div class="progress-label hide">Progress: <span id="progress-text">50%</span></div>
+    
+          </div>
+        </div>
+      </div>
+       
+        </div>
+    </section>
+
+    <script>
+        let demo = document.getElementById('demoss')
+        let ctac = document.getElementById('ctac')
+        let dbtn = document.getElementById('dbtn')
+        dbtn.addEventListener('click',()=>{
+            demo.classList.remove('hide')
+            demo.classList.add('cta-content')
+            ctac.classList.add('hide')
+
+        })
+       
+
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>LogicalSolutions</h3>
+                    <p>Empowering you with coding skills through personalized tutoring. Master Python, Web Development, and their integration.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Programs</a></li>
+                        <li><a href="#how-it-works"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+                        <li><a href="#limitations"><i class="fas fa-chevron-right"></i> Program Details</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> API Reference</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Case Studies</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Research Papers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:technify.u.me@gmail.com"><i class="fas fa-envelope"></i> technify.u.me@gmail.com</a></li>
+                        <li><a href="tel:+27629620814"><i class="fas fa-phone"></i> 062 962 0814</a></li>
+                        <li><a href="https://LogicalSolutions.org" target="_blank"><i class="fas fa-globe"></i> LogicalSolutions.org</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 LogicalSolutions All rights reserved. |  <span class="message m2"><a href='Terms _and_Conditions/index.html'>Terms and Conditions</a></span></p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/index.js">
+        
+    </script>
+
+    <script>
+        // Mobile Navigation Toggle
+       
+      
+        
+        // Header scroll effect
+        
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.feature-card, .process-step, .limitation-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.feature-card, .process-step, .limitation-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        // Trigger animations on scroll
+        window.addEventListener('scroll', animateOnScroll);
+        // Initial check in case elements are already in view
+        window.addEventListener('load', animateOnScroll);
+    </script>
+
+ <script>
+        function getHomePath(){
+  basePath= window.location.pathname.split('/')
+
+       let npath=''
+       if (line=='https://sculpin-charming-directly.ngrok-free.app'){
+
+        npath=bpath
+       }else{
+             for ( i in basePath){
+          npath=npath + '/' + basePath[i]
+          // console.log(npath)
+          if (basePath[i]=='WEBAPP'){
+            break
+          }
+      }
+       }
+       
+    return npath
+}
+        let homepath= getHomePath()
+        localStorage.setItem('Freeprev_path',`${homepath}/index.html`)
+        localStorage.setItem('typeOfPath','Return to Home')
+    </script>
+
+
+<style>
+.code-snippet-module {
+    display: flex;
+    justify-content: center;
+    margin: 40px auto;
+    font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace;
+    max-width: 900px;          /* prevents overly wide lines on large displays */
+    width: 100%;
+    padding: 0 20px;           /* consistent side padding */
+    box-sizing: border-box;
+}
+
+.code-window {
+    width: 100%;
+    background: #0f172a;
+    border-radius: 16px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    transition: border-radius 0.2s, box-shadow 0.2s;
+}
+
+.header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 12px 16px;
+    background: #020617;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    flex-wrap: wrap;           /* allow items to wrap if screen is tiny */
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+.file {
+    margin-left: 5px;
+    font-size: 13px;
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;          /* avoid extremely long file names */
+}
+
+pre {
+    margin: 0;
+    padding: 10px;
+    font-size: clamp(14px, 3.5vw, 16px);  /* fluid, capped at 16px */
+    line-height: 1.7;
+    color: #e2e8f0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #0f172a;       /* ensures consistency */
+}
+
+/* syntax highlighting (unchanged) */
+.keyword { color: #38bdf8; }
+.variable { color: #facc15; }
+.function { color: #a78bfa; }
+.number { color: #22c55e; }
+
+.cursor {
+    display: inline-block;
+    width: 9px;
+    background: #38bdf8;
+    margin-left: 4px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+    .code-snippet-module {
+        max-width: 800px;
+        padding: 0 24px;
+    }
+    pre {
+        font-size: 15px;
+        padding: 22px;
+    }
+}
+
+/* Tablets (landscape and portrait) */
+@media (max-width: 768px) {
+    .code-window {
+        border-radius: 14px;
+    }
+    .header {
+        padding: 10px 14px;
+    }
+    .file {
+        font-size: 12px;
+        max-width: 150px;
+    }
+    pre {
+        padding: 20px;
+        line-height: 1.6;
+    }
+}
+
+/* Phones (large) */
+@media (max-width: 600px) {
+    .code-snippet-module {
+        padding: 0 16px;
+        margin: 30px auto;
+    }
+    .header {
+        gap: 6px;
+        padding: 8px 12px;
+    }
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+    .file {
+        font-size: 11px;
+        max-width: 120px;
+        margin-left: 6px;
+    }
+    pre {
+        padding: 16px;
+        font-size: 14px;
+    }
+    .cursor {
+        width: 7px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .code-snippet-module {
+        padding: 0 8px;
+        margin: 20px auto;
+    }
+    .header {
+        padding: 8px 10px;
+        gap: 5px;
+    }
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+    .file {
+        font-size: 10px;
+        max-width: 100px;
+        margin-left: 4px;
+    }
+    pre {
+        padding: 12px;
+        font-size: clamp(12px, 4vw, 14px);
+        line-height: 1.5;
+    }
+}
+
+/* Very narrow (foldables, 320px and below) */
+@media (max-width: 360px) {
+    .header {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+    }
+    .file {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+        max-width: none;
+        white-space: normal;    /* allow wrapping when needed */
+    }
+    pre {
+        padding: 10px;
+        font-size: 12px;
+    }
+}
+
+/* Landscape orientation on phones (short screens) */
+@media (max-height: 500px) and (orientation: landscape) {
+    .code-snippet-module {
+        margin: 10px auto;
+    }
+    pre {
+        max-height: 60vh;
+        overflow-y: auto;
+        padding: 12px;
+    }
+}
+
+/* High‑resolution / large desktop screens */
+@media (min-width: 1800px) {
+    .code-snippet-module {
+        max-width: 1000px;      /* slightly wider but still comfortable */
+    }
+    pre {
+        font-size: 17px;
+        padding: 28px;
+        line-height: 1.8;
+    }
+}
+</style>
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+const codeText = `marks = write(Exam)
+while marks <= 90%:
+                   chow_course("Buff-effort")`;
+
+const code = document.querySelector(".code-snippet-module pre");
+
+let i = 0;
+
+function type(){
+
+if(i < codeText.length){
+
+code.textContent += codeText.charAt(i);
+i++;
+
+setTimeout(type,30);
+
+}else{
+highlight();
+}
+
+}
+
+function highlight(){
+
+let html = code.textContent;
+
+html = html.replace(/marks/g,'<span class="variable">marks</span>');
+html = html.replace(/while/g,'<span class="keyword">while</span>');
+html = html.replace(/input/g,'<span class="function">input</span>');
+html = html.replace(/chow_course/g,'<span class="function"> chow_course</span>');
+html = html.replace(/90/g,'<span class="number">90</span>');
+
+code.innerHTML = html + '<span class="cursor"></span>';
+
+}
+
+type();
+
+});
+
+</script>
+</body>
+</html>
