@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical Solutions, Inc. | Advertising Campaign Optimization LP Solver</title>
+    <!-- Tailwind CSS for high-fidelity responsive layout systems -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Grid background pattern for corporate tech feel */
+        .bg-grid-pattern {
+            background-size: 30px 30px;
+            background-image: linear-gradient(to right, rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+        }
+        .light .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(51, 65, 85, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(51, 65, 85, 0.03) 1px, transparent 1px);
+        }
+        /* Print Styles for high quality report exports */
+        @media print {
+            body {
+                background-color: white !important;
+                color: black !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-full-width {
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: none !important;
+            }
+            .print-card {
+                border: 1px solid #e2e8f0 !important;
+                box-shadow: none !important;
+                background-color: white !important;
+                page-break-inside: avoid;
+            }
+            .print-grid {
+                display: block !important;
+            }
+            canvas {
+                border: 1px solid #94a3b8 !important;
+                max-height: 450px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen transition-colors duration-200 bg-grid-pattern">
+
+    <!-- Logical Solutions Branded Corporate Header -->
+    <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-50 no-print">
+        <!-- Top Tech Utility Bar -->
+        <div class="bg-slate-950 px-4 sm:px-6 lg:px-8 py-1 text-[10px] text-slate-400 border-b border-slate-900/60 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span> Enterprise Support Active</span>
+                <span class="hidden md:inline">|</span>
+                <span class="hidden md:inline text-slate-500">Security Standard: AES-256 Enabled</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="https://logicalsolutions-inc.github.io/code/" target="_blank" class="hover:text-white transition flex items-center gap-1">
+                    <i data-lucide="external-link" class="w-3 h-3"></i> Core Code Hub
+                </a>
+                <span>•</span>
+                <a href="https://logicalsolutions.org" target="_blank" class="hover:text-white transition">logicalsolutions.org</a>
+            </div>
+        </div>
+
+        <!-- Main Portal Header Nav -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3.5">
+                <!-- Branded Logo Emblem representing Logic Solutions structural solver -->
+                <div class="p-2 bg-indigo-600/10 text-indigo-400 rounded-xl border border-indigo-500/20 shadow-md">
+                    <div class="relative">
+                        <i data-lucide="cpu" class="w-6 h-6 text-indigo-400"></i>
+                        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-indigo-500 rounded-full border-2 border-slate-950"></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-indigo-400 tracking-widest uppercase">Logical Solutions</span>
+                        <span class="px-1.5 py-0.2 text-[8px] font-semibold bg-indigo-500/10 text-indigo-300 rounded border border-indigo-500/20 uppercase tracking-wider">DSS App</span>
+                    </div>
+                    <h1 class="text-lg font-extrabold tracking-tight text-white flex items-center gap-2">
+                        Campaign Optimization LP Visualizer
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Dashboard Global Tool Actions -->
+            <div class="flex items-center gap-2">
+                <button onclick="restoreDefaultLabels()" class="px-3 py-1.5 text-xs font-semibold bg-indigo-900/40 hover:bg-indigo-950 text-indigo-300 rounded-lg border border-indigo-700/50 transition flex items-center gap-1.5">
+                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Restore Default Labels
+                </button>
+                <button onclick="resetToDefaults()" class="px-3 py-1.5 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset Toggles
+                </button>
+                <button onclick="toggleTheme()" class="p-1.5 text-slate-400 hover:text-white bg-slate-800 rounded-lg border border-slate-700 transition">
+                    <i id="theme-icon" data-lucide="sun" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Interactive Breadcrumb Tracking -->
+        <div class="mb-5 flex items-center gap-2 text-xs text-slate-400 no-print">
+            <span class="hover:text-white transition cursor-pointer">Logical Solutions Hub</span>
+            <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            <span class="hover:text-white transition cursor-pointer">Operations Research Portal</span>
+            <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            <span class="text-indigo-400 font-medium">Interactive LP Multi-Scenario Solver (f.html)</span>
+        </div>
+
+        <!-- Explanatory Unified Banner -->
+        <div class="mb-6 p-4 bg-indigo-950/30 border border-indigo-500/30 rounded-xl text-sm flex items-start gap-3 no-print">
+            <i data-lucide="sparkles" class="w-5 h-5 text-indigo-400 shrink-0 mt-0.5"></i>
+            <div>
+                <span class="font-bold text-indigo-300">Decision Support System Workspace:</span> Click directly on the grid to **add custom notes/labels** to your solver space or double-click existing labels to adjust their mathematical coordinate tags. Fully aligned with Question 1.1, 1.2, and 1.3 marketing modeling metrics.
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 print-grid">
+            <!-- Left Side: Interactive Graphic Panel -->
+            <div class="lg:col-span-7 flex flex-col gap-6 print-full-width">
+                <!-- Master Graph Card -->
+                <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl relative print-card">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 no-print">
+                        <div>
+                            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                <i data-lucide="map" class="w-5 h-5 text-indigo-400"></i> Labeled Solution Space
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-1">Double click near any label to edit/remove, or click grid to add label</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="downloadGraph()" class="px-3 py-1.5 text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition flex items-center gap-1.5 shadow-lg shadow-emerald-900/20">
+                                <i data-lucide="download" class="w-3.5 h-3.5"></i> Save Labeled Plot (PNG)
+                            </button>
+                            <button onclick="window.print()" class="px-3 py-1.5 text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition flex items-center gap-1.5 shadow-lg shadow-indigo-900/20">
+                                <i data-lucide="printer" class="w-3.5 h-3.5"></i> PDF Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Canvas Canvas Wrapper -->
+                    <div class="relative w-full overflow-hidden bg-slate-900 rounded-xl border border-slate-800 print:bg-white print:border-slate-300">
+                        <!-- Legend HUD overlay -->
+                        <div id="hud-overlay" class="absolute top-3 left-3 bg-slate-950/90 border border-slate-800 text-[10px] sm:text-xs p-3 rounded-lg z-10 flex flex-col gap-1 text-slate-300 backdrop-blur no-print">
+                            <div class="font-bold text-white border-b border-slate-800 pb-1 mb-1">Hover Metric Reader</div>
+                            <div>Social Media Posts (x): <span id="hud-x" class="text-indigo-400 font-bold">-</span></div>
+                            <div>Radio Ads (y): <span id="hud-y" class="text-orange-400 font-bold">-</span></div>
+                            <div>Allocated Budget: <span id="hud-budget" class="text-blue-400">-</span></div>
+                            <div>Labor Invested: <span id="hud-labor" class="text-emerald-400">-</span></div>
+                            <div class="border-t border-slate-800 pt-1 mt-1 flex flex-col gap-0.5">
+                                <div>1.1 Reach: <span id="hud-reach1" class="text-yellow-400 font-bold">-</span></div>
+                                <div>1.2 Reach: <span id="hud-reach2" class="text-teal-400 font-bold">-</span></div>
+                                <div>1.3 Reach: <span id="hud-reach3" class="text-red-400 font-bold">-</span></div>
+                            </div>
+                            <div class="mt-1 flex items-center gap-1 border-t border-slate-800 pt-1">
+                                Space Compliance: <span id="hud-status" class="px-1.5 py-0.2 rounded font-bold uppercase text-[9px]">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Toast / Canvas Quick Editor Modal -->
+                        <div id="quick-editor-modal" class="hidden absolute top-3 right-3 left-3 sm:left-auto sm:w-80 bg-slate-950 border border-indigo-500/40 p-4 rounded-xl z-20 shadow-2xl backdrop-blur no-print">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-2">
+                                <h4 class="text-xs font-bold text-indigo-400 flex items-center gap-1.5">
+                                    <i data-lucide="edit" class="w-3.5 h-3.5"></i> <span id="modal-title">Label Operations</span>
+                                </h4>
+                                <button onclick="closeQuickEditor()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-4 h-4"></i></button>
+                            </div>
+                            <div class="space-y-3 text-xs">
+                                <div>
+                                    <label class="block text-slate-400 mb-1">Label Text</label>
+                                    <input type="text" id="modal-text" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-white focus:outline-none focus:border-indigo-500">
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="block text-slate-400 mb-1">X Coord (0-18)</label>
+                                        <input type="number" step="0.1" id="modal-x" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-white focus:outline-none focus:border-indigo-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-slate-400 mb-1">Y Coord (0-12)</label>
+                                        <input type="number" step="0.1" id="modal-y" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-white focus:outline-none focus:border-indigo-500">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="block text-slate-400 mb-1">Text Color</label>
+                                        <input type="color" id="modal-color" class="w-full h-8 bg-slate-900 border border-slate-700 rounded p-0.5 cursor-pointer">
+                                    </div>
+                                    <div class="flex items-end">
+                                        <button id="modal-delete-btn" onclick="deleteActiveLabel()" class="w-full py-1.5 bg-rose-900/40 border border-rose-700/50 hover:bg-rose-950 text-rose-300 rounded transition font-semibold flex items-center justify-center gap-1">
+                                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Delete
+                                        </button>
+                                    </div>
+                                </div>
+                                <button onclick="saveQuickEditor()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded transition">
+                                    Save Label Changes
+                                </button>
+                            </div>
+                        </div>
+
+                        <canvas id="lp-canvas" class="w-full aspect-square md:aspect-[4/3] block cursor-crosshair print:invert-0"></canvas>
+                    </div>
+
+                    <!-- Interactive Graphics Toggles -->
+                    <div class="mt-6 p-4 bg-slate-900/50 border border-slate-800/80 rounded-xl no-print">
+                        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Interactive Layers Control</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <!-- Show constraints boundaries toggle -->
+                            <div class="flex items-center justify-between p-2.5 bg-slate-950/60 rounded-lg border border-slate-800">
+                                <span class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 bg-blue-500 rounded-full"></span>
+                                    <span>Constraint Boundaries</span>
+                                </span>
+                                <input type="checkbox" id="toggle-constraints" checked onchange="drawPlot()" class="rounded text-indigo-500 focus:ring-0 cursor-pointer">
+                            </div>
+                            <!-- Show Shaded Area -->
+                            <div class="flex items-center justify-between p-2.5 bg-slate-950/60 rounded-lg border border-slate-800">
+                                <span class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 bg-indigo-500/20 border border-indigo-400 rounded-full"></span>
+                                    <span>Feasible Area Shading</span>
+                                </span>
+                                <input type="checkbox" id="toggle-feasible" checked onchange="drawPlot()" class="rounded text-indigo-500 focus:ring-0 cursor-pointer">
+                            </div>
+                            <!-- Show Q1.1 Reference -->
+                            <div class="flex items-center justify-between p-2.5 bg-slate-950/60 rounded-lg border border-slate-800">
+                                <span class="flex items-center gap-2">
+                                    <span class="w-2.5 h-1 border-t border-dashed border-amber-500"></span>
+                                    <span>Q1.1 Reference Iso-Reach (105k)</span>
+                                </span>
+                                <input type="checkbox" id="toggle-ref105" checked onchange="drawPlot()" class="rounded text-indigo-500 focus:ring-0 cursor-pointer">
+                            </div>
+                            <!-- Show Q1.1 Isoreach -->
+                            <div class="flex items-center justify-between p-2.5 bg-slate-950/60 rounded-lg border border-slate-800">
+                                <span class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 bg-yellow-400 rounded-full"></span>
+                                    <span>Q1.1 Optimal Iso-Reach (141k)</span>
+                                </span>
+                                <input type="checkbox" id="toggle-reach11" checked onchange="drawPlot()" class="rounded text-indigo-500 focus:ring-0 cursor-pointer">
+                            </div>
+                            <!-- Show Q1.2 Isoreach -->
+                            <div class="flex items-center justify-between p-2.5 bg-slate-950/60 rounded-lg border border-slate-800">
+                                <span class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 bg-teal-400 rounded-full"></span>
+                                    <span>Q1.2 Optimal Iso-Reach (112.5k)</span>
+                                </span>
+                                <input type="checkbox" id="toggle-reach12" checked onchange="drawPlot()" class="rounded text-indigo-500 focus:ring-0 cursor-pointer">
+                            </div>
+                            <!-- Show Q1.3 Isoreach -->
+                            <div class="flex items-center justify-between p-2.5 bg-slate-950/60 rounded-lg border border-slate-800">
+                                <span class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 bg-red-400 rounded-full"></span>
+                                    <span>Q1.3 Optimal Iso-Reach (297k)</span>
+                                </span>
+                                <input type="checkbox" id="toggle-reach13" checked onchange="drawPlot()" class="rounded text-indigo-500 focus:ring-0 cursor-pointer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Complete Worked Calculations Panel / Interactive Label Manager -->
+            <div class="lg:col-span-5 flex flex-col gap-6 print-full-width">
+                <!-- Tabs Container -->
+                <div class="bg-slate-950 border border-slate-800 rounded-2xl shadow-xl overflow-hidden print-card">
+                    <!-- Tab Headers -->
+                    <div class="flex border-b border-slate-800 bg-slate-950 no-print">
+                        <button onclick="switchTab('calculations')" id="tab-btn-calculations" class="flex-1 py-4 text-xs font-bold tracking-wider uppercase border-b-2 border-indigo-500 text-white flex items-center justify-center gap-2 transition">
+                            <i data-lucide="book-open" class="w-4 h-4 text-indigo-400"></i> Consolidated Solution
+                        </button>
+                        <button onclick="switchTab('labels')" id="tab-btn-labels" class="flex-1 py-4 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-slate-400 hover:text-white flex items-center justify-center gap-2 transition">
+                            <i data-lucide="tags" class="w-4 h-4 text-indigo-400"></i> Label Customizer (<span id="labels-count">0</span>)
+                        </button>
+                    </div>
+
+                    <!-- TAB content: Calculations -->
+                    <div id="tab-content-calculations" class="p-6 space-y-6">
+                        <!-- Homework Section 1.1 -->
+                        <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-800/60">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-1.5 mb-2">
+                                <span class="text-xs font-bold text-yellow-400 tracking-wider uppercase">Question 1.1 (Base Campaign Model)</span>
+                                <button onclick="copySection('text-11')" class="text-slate-500 hover:text-slate-300 no-print transition"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+                            </div>
+                            <div id="text-11" class="text-xs space-y-2 text-slate-300">
+                                <p><strong>(a) Objective Function:</strong> Maximize $Z = 8000x + 15000y$ (Maximisation problem to maximize total campaign audience reach).</p>
+                                <p><strong>(b) Constraints:</strong>
+                                    <br>• Budget: $1500x + 4000y \le 30000 \implies 3x + 8y \le 60$
+                                    <br>• Labor hours: $2.25x + 5y \ge 28$ (2h 15m is $2.25$ hours)
+                                    <br>• Brand presence: $x \ge y \implies x - y \ge 0$
+                                    <br>• Local Station limit: $y \le 5$
+                                    <br>• Client Spam cap: $x \le 12$
+                                    <br>• Realities: $x, y \ge 0$
+                                </p>
+                                <p><strong>(e) Binding Constraints:</strong> Budget limit ($3x+8y \le 60$) and Client Spam cap ($x \le 12$).</p>
+                                <p><strong>(f) Optimal Allocation:</strong> <strong class="text-white">12 Social Media Posts</strong> and <strong class="text-white">3 Radio Ads</strong>.</p>
+                                <p><strong>(g) Optimal Audience Reach:</strong> <strong class="text-emerald-400">141,000 people</strong> ($8000(12) + 15000(3)$).</p>
+                            </div>
+                        </div>
+
+                        <!-- Homework Section 1.2 -->
+                        <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-800/60">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-1.5 mb-2">
+                                <span class="text-xs font-bold text-teal-400 tracking-wider uppercase">Question 1.2 (Social Reach drops to 5625)</span>
+                                <button onclick="copySection('text-12')" class="text-slate-500 hover:text-slate-300 no-print transition"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+                            </div>
+                            <div id="text-12" class="text-xs space-y-2 text-slate-300">
+                                <p><strong>(a) Iso-Reach Path:</strong> With objective $Z = 5625x + 15000y$, the isoreach slope ($-\frac{5625}{15000} = -0.375$) is exactly parallel to the budget slope ($-\frac{1500}{4000} = -0.375$).</p>
+                                <p>Evaluating corner nodes:</p>
+                                <ul class="list-disc pl-5 text-[10px] text-slate-400 font-mono space-y-0.5">
+                                    <li>Point $(5, 5)$: $5625(5) + 15000(5) = 103,125$</li>
+                                    <li>Point $(6.67, 5)$: $5625(6.67) + 15000(5) = \mathbf{112,500}$ (Optimal)</li>
+                                    <li>Point $(12, 3)$: $5625(12) + 15000(3) = \mathbf{112,500}$ (Optimal)</li>
+                                    <li>Point $(12, 0.2)$: $5625(12) + 15000(0.2) = 70,500$</li>
+                                </ul>
+                                <p>Because the objective slope matches the budget limit, there are **infinite optimal solutions** along the boundary segment connecting **$(6.67, 5)$** and **$(12, 3)$** where the optimal isoreach line equations overlaps the budget boundary.</p>
+                                <p><strong>(b) Optimal Reach:</strong> <strong class="text-teal-400">112,500 people</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- Homework Section 1.3 -->
+                        <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-800/60">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-1.5 mb-2">
+                                <span class="text-xs font-bold text-red-400 tracking-wider uppercase">Question 1.3 (Social Reach surges to 21000)</span>
+                                <button onclick="copySection('text-13')" class="text-slate-500 hover:text-slate-300 no-print transition"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+                            </div>
+                            <div id="text-13" class="text-xs space-y-2 text-slate-300">
+                                <p><strong>(a) Iso-Reach Path:</strong> Objective shifts to $Z = 21000x + 15000y$, with a steep slope of $m = -\frac{21}{15} = -1.4$.</p>
+                                <p>Evaluating corner nodes:</p>
+                                <ul class="list-disc pl-5 text-[10px] text-slate-400 font-mono space-y-0.5">
+                                    <li>Point $(5, 5)$: $21000(5) + 15000(5) = 180,000$</li>
+                                    <li>Point $(6.67, 5)$: $21000(6.67) + 15000(5) = 215,000$</li>
+                                    <li>Point $(12, 3)$: $21000(12) + 15000(3) = \mathbf{297,000}$ (Optimal)</li>
+                                    <li>Point $(12, 0.2)$: $21000(12) + 15000(0.2) = 255,000$</li>
+                                </ul>
+                                <p>The optimal line equation is $21000x + 15000y = 297000$ (with intercepts at $(14.14,0)$ and $(0, 19.8)$), touching the feasible region corner at point $(12, 3)$ which remains the absolute maximum.</p>
+                                <p><strong>(b) Optimal Reach:</strong> <strong class="text-red-400">297,000 people</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- Homework Section 1.4 -->
+                        <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-800/60">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-1.5 mb-2">
+                                <span class="text-xs font-bold text-indigo-400 tracking-wider uppercase">Question 1.4 (Slope Rules Comparison)</span>
+                                <button onclick="copySection('text-14')" class="text-slate-500 hover:text-slate-300 no-print transition"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+                            </div>
+                            <div id="text-14" class="text-xs text-slate-300 leading-relaxed font-semibold">
+                                "As the relative audience reach of social media posts increases across Q1.2 ($m=-0.375$), Q1.1 ($m=-0.533$), and Q1.3 ($m=-1.4$), the slope of the iso-reach line becomes increasingly steep, pivoting the optimal campaign configuration along the budget boundary from an entire parallel line segment (Q1.2) to a specific corner solution locked at the maximum social posts limit (Q1.1 & Q1.3)."
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB content: Interactive Label Customizer -->
+                    <div id="tab-content-labels" class="hidden p-6 space-y-4 no-print">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="text-sm font-semibold text-white">Active Chart Labels</h3>
+                                <p class="text-xs text-slate-400">Modify coordinate vectors & wording tags live</p>
+                            </div>
+                            <button onclick="addNewCustomLabel()" class="px-2.5 py-1 text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded flex items-center gap-1.5 transition">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add custom note
+                            </button>
+                        </div>
+
+                        <!-- Search label and list scroll box -->
+                        <div class="max-h-[500px] overflow-y-auto space-y-2 pr-1" id="labels-panel-list">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Professional Corporate Footer -->
+    <footer class="mt-16 border-t border-slate-850 bg-slate-950 py-8 text-xs text-slate-500 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <i data-lucide="cpu" class="w-4 h-4 text-slate-600"></i>
+                <span>Decision Support Suite • Designed for <a href="https://logicalsolutions.org" target="_blank" class="text-indigo-400 hover:underline">Logical Solutions, Inc.</a></span>
+            </div>
+            <div class="flex gap-4">
+                <a href="https://logicalsolutions-inc.github.io/code/" target="_blank" class="hover:text-slate-300 transition">Repository</a>
+                <span>•</span>
+                <span>System version: v4.2.1-OR</span>
+                <span>•</span>
+                <span>© 2026 Logical Solutions, Inc. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // System variables matching Assignment requirements
+        const config = {
+            budgetTotal: 30000,
+            costPost: 1500,
+            costRadio: 4000,
+            minHours: 28,
+            hoursPost: 2.25, // 2 hours 15 mins
+            hoursRadio: 5,
+            maxRadio: 5,
+            maxPost: 12,
+            theme: 'dark'
+        };
+
+        // Static Default Labels list matching assignment layout
+        const INITIAL_LABELS = [
+            // 1. Budget line labels
+            { id: '1', text: 'Budget Limit: 1.5kx + 4ky = 30k', x: 8.5, y: 4.3, color: '#3b82f6', layer: 'constraints' },
+            { id: '2', text: '(0, 7.5)', x: 1.5, y: 7.5, color: '#3b82f6', layer: 'constraints' },
+            { id: '3', text: '(20, 0)', x: 19, y: 1.2, color: '#3b82f6', layer: 'constraints' },
+            // 2. Labor line labels
+            { id: '4', text: 'Labor Required: 2.25x + 5y = 28', x: 3, y: 4.5, color: '#10b981', layer: 'constraints' },
+            { id: '5', text: '(0, 5.6)', x: 1.5, y: 5.6, color: '#10b981', layer: 'constraints' },
+            { id: '6', text: '(12.4, 0)', x: 12.4, y: 1.2, color: '#10b981', layer: 'constraints' },
+            // 3. Brand ratio
+            { id: '7', text: 'Brand Ratio: x = y', x: 8, y: 8, color: '#8b5cf6', layer: 'constraints' },
+            // 4. Station limit
+            { id: '8', text: 'Broadcasting ceiling: y = 5', x: 15, y: 5, color: '#f97316', layer: 'constraints' },
+            { id: '9', text: '(0, 5)', x: 1.5, y: 5, color: '#f97316', layer: 'constraints' },
+            // 5. Spam Limit
+            { id: '10', text: 'Followers Cap: x = 12', x: 12, y: 10, color: '#ec4899', layer: 'constraints' },
+            { id: '11', text: '(12, 0)', x: 12, y: 1.2, color: '#ec4899', layer: 'constraints' },
+            // 6. Q1.1 Reference Line (Z = 105,000)
+            { id: '12', text: 'Q1.1 Reference Iso-Reach: 8kx + 15ky = 105k', x: 6.5, y: 3.5, color: '#eab308', layer: 'ref105' },
+            // 7. Q1.1 Optimal Line (Z = 141,000)
+            { id: '13', text: 'Q1.1 Opt Line: 8kx + 15ky = 141k', x: 10, y: 4, color: '#eab308', layer: 'reach11' },
+            { id: '14', text: 'Q1.1 Opt Vertex (12, 3) [141k Reach]', x: 14.5, y: 3, color: '#eab308', layer: 'reach11' },
+            // 8. Q1.2 Optimal Line (Z = 112,500)
+            { id: '15', text: 'Q1.2 Opt Segment (112.5k Reach)', x: 9.3, y: 4, color: '#14b8a6', layer: 'reach12' },
+            { id: '16', text: '(6.67, 5)', x: 6.67, y: 5.5, color: '#14b8a6', layer: 'reach12' },
+            // 9. Q1.3 Optimal Line (Z = 297,000)
+            { id: '17', text: 'Q1.3 Opt Line: 21kx + 15ky = 297k', x: 11, y: 2.3, color: '#f43f5e', layer: 'reach13' },
+            { id: '18', text: 'Q1.3 Opt Vertex (12, 3) [297k Reach]', x: 14.5, y: 3.6, color: '#f43f5e', layer: 'reach13' }
+        ];
+
+        // Dynamic State Labels Store
+        let activeLabels = JSON.parse(JSON.stringify(INITIAL_LABELS));
+        let selectedLabelId = null;
+
+        const canvas = document.getElementById('lp-canvas');
+        const ctx = canvas.getContext('2d');
+        let hoverCoords = null;
+
+        // Visual plot limits margins
+        const plotMargins = { left: 65, right: 35, top: 40, bottom: 55 };
+
+        // Math axes scaling
+        const xMaxVal = 18; // Maximum bounds for Social Media Posts
+        const yMaxVal = 12; // Maximum bounds for Radio Ads
+
+        // Transform real coordinate to canvas pixels
+        function toCanvas(x, y, rectWidth, rectHeight) {
+            const plotW = rectWidth - plotMargins.left - plotMargins.right;
+            const plotH = rectHeight - plotMargins.top - plotMargins.bottom;
+            const cx = plotMargins.left + (x / xMaxVal) * plotW;
+            const cy = rectHeight - plotMargins.bottom - (y / yMaxVal) * plotH;
+            return { x: cx, y: cy };
+        }
+
+        // Transform canvas pixels to real coordinates
+        function toMathCoords(cx, cy, rectWidth, rectHeight) {
+            const plotW = rectWidth - plotMargins.left - plotMargins.right;
+            const plotH = rectHeight - plotMargins.top - plotMargins.bottom;
+            const mx = ((cx - plotMargins.left) / plotW) * xMaxVal;
+            const my = ((rectHeight - plotMargins.bottom - cy) / plotH) * yMaxVal;
+            return { x: mx, y: my };
+        }
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawPlot();
+        }
+
+        window.addEventListener('load', () => {
+            lucide.createIcons();
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            setupCanvasInteraction();
+            renderLabelsControlPanel();
+        });
+
+        function resetToDefaults() {
+            document.getElementById('toggle-constraints').checked = true;
+            document.getElementById('toggle-feasible').checked = true;
+            document.getElementById('toggle-ref105').checked = true;
+            document.getElementById('toggle-reach11').checked = true;
+            document.getElementById('toggle-reach12').checked = true;
+            document.getElementById('toggle-reach13').checked = true;
+            drawPlot();
+        }
+
+        function toggleTheme() {
+            config.theme = config.theme === 'dark' ? 'light' : 'dark';
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (config.theme === 'light') {
+                body.classList.remove('bg-slate-900', 'text-slate-100');
+                body.classList.add('bg-slate-50', 'text-slate-900', 'light');
+                themeIcon.setAttribute('data-lucide', 'moon');
+            } else {
+                body.classList.remove('bg-slate-50', 'text-slate-900', 'light');
+                body.classList.add('bg-slate-900', 'text-slate-100');
+                themeIcon.setAttribute('data-lucide', 'sun');
+            }
+            lucide.createIcons();
+            drawPlot();
+        }
+
+        // Standard linear algebra line crossing calculator
+        function lineIntersection(l1, l2) {
+            const det = l1.a * l2.b - l2.a * l1.b;
+            if (Math.abs(det) < 1e-9) return null;
+            return {
+                x: (l2.b * l1.c - l1.b * l2.c) / det,
+                y: (l1.a * l2.c - l2.a * l1.c) / det
+            };
+        }
+
+        function calculateFeasibleVertices() {
+            // Equations in system form: ax + by = c
+            const lines = [
+                { a: 0, b: 1, c: 0 },                                        // y >= 0
+                { a: 1, b: 0, c: 0 },                                        // x >= 0
+                { a: config.costPost, b: config.costRadio, c: config.budgetTotal }, // 1500x + 4000y <= 30000
+                { a: config.hoursPost, b: config.hoursRadio, c: config.minHours }, // 2.25x + 5y >= 28
+                { a: 1, b: -1, c: 0 },                                       // x - y >= 0
+                { a: 0, b: 1, c: config.maxRadio },                           // y <= 5
+                { a: 1, b: 0, c: config.maxPost }                            // x <= 12
+            ];
+
+            const vertices = [];
+            const eps = 1e-5;
+
+            for (let i = 0; i < lines.length; i++) {
+                for (let j = i + 1; j < lines.length; j++) {
+                    const pt = lineIntersection(lines[i], lines[j]);
+                    if (pt) {
+                        const feasible = 
+                            pt.x >= 0 - eps &&
+                            pt.y >= 0 - eps &&
+                            (config.costPost * pt.x + config.costRadio * pt.y) <= config.budgetTotal + eps &&
+                            (config.hoursPost * pt.x + config.hoursRadio * pt.y) >= config.minHours - eps &&
+                            pt.x >= pt.y - eps &&
+                            pt.y <= config.maxRadio + eps &&
+                            pt.x <= config.maxPost + eps;
+
+                        if (feasible) vertices.push(pt);
+                    }
+                }
+            }
+
+            // Keep unique values
+            const unique = [];
+            vertices.forEach(p => {
+                if (!unique.some(u => Math.abs(u.x - p.x) < 1e-4 && Math.abs(u.y - p.y) < 1e-4)) {
+                    unique.push(p);
+                }
+            });
+
+            // Clockwise polygon sort
+            if (unique.length > 0) {
+                let cx = 0, cy = 0;
+                unique.forEach(p => { cx += p.x; cy += p.y; });
+                cx /= unique.length;
+                cy /= unique.length;
+                unique.sort((a, b) => Math.atan2(a.y - cy, a.x - cx) - Math.atan2(b.y - cy, b.x - cx));
+            }
+
+            return unique;
+        }
+
+        function drawPlot() {
+            const rect = canvas.getBoundingClientRect();
+            const w = rect.width;
+            const h = rect.height;
+
+            const darkTheme = config.theme === 'dark';
+            const gridColor = darkTheme ? '#1e293b' : '#e2e8f0';
+            const axisColor = darkTheme ? '#64748b' : '#334155';
+            const textColor = darkTheme ? '#94a3b8' : '#475569';
+            const titleTextColor = darkTheme ? '#ffffff' : '#0f172a';
+            const canvasBgColor = darkTheme ? '#090d16' : '#ffffff';
+
+            const labelBgColor = darkTheme ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.98)';
+            const labelBorderColor = darkTheme ? '#334155' : '#cbd5e1';
+
+            ctx.fillStyle = canvasBgColor;
+            ctx.fillRect(0, 0, w, h);
+
+            // Fetch Toggle States
+            const showConstraints = document.getElementById('toggle-constraints').checked;
+            const showFeasible = document.getElementById('toggle-feasible').checked;
+            const showRef105 = document.getElementById('toggle-ref105').checked;
+            const showReach11 = document.getElementById('toggle-reach11').checked;
+            const showReach12 = document.getElementById('toggle-reach12').checked;
+            const showReach13 = document.getElementById('toggle-reach13').checked;
+
+            function drawBoxedText(txt, mx, my, color, bgCol = labelBgColor, borderCol = labelBorderColor, fontSize = '9px', isSelected = false) {
+                const pt = toCanvas(mx, my, w, h);
+                ctx.font = `${fontSize} "JetBrains Mono", monospace`;
+                const textWidth = ctx.measureText(txt).width;
+                const padX = 5;
+                const padY = 3;
+
+                ctx.fillStyle = bgCol;
+                ctx.strokeStyle = isSelected ? '#a5b4fc' : borderCol;
+                ctx.lineWidth = isSelected ? 2 : 1;
+                ctx.beginPath();
+                ctx.roundRect(pt.x - textWidth/2 - padX, pt.y - 6 - padY, textWidth + padX*2, 12 + padY*2, 4);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = color;
+                ctx.textAlign = 'center';
+                ctx.fillText(txt, pt.x, pt.y + 3);
+
+                // If selected, draw tiny selection brackets
+                if (isSelected) {
+                    ctx.strokeStyle = '#6366f1';
+                    ctx.lineWidth = 1.5;
+                    ctx.strokeRect(pt.x - textWidth/2 - padX - 3, pt.y - 6 - padY - 3, textWidth + padX*2 + 6, 12 + padY*2 + 6);
+                }
+            }
+
+            // Grid Layout lines
+            ctx.strokeStyle = gridColor;
+            ctx.lineWidth = 1;
+            ctx.font = '9px "JetBrains Mono", monospace';
+            ctx.fillStyle = textColor;
+            ctx.textAlign = 'center';
+
+            for (let x = 0; x <= xMaxVal; x += 2) {
+                const pt = toCanvas(x, 0, w, h);
+                ctx.beginPath();
+                ctx.moveTo(pt.x, plotMargins.top);
+                ctx.lineTo(pt.x, h - plotMargins.bottom);
+                ctx.stroke();
+                ctx.fillText(x, pt.x, h - plotMargins.bottom + 15);
+            }
+
+            ctx.textAlign = 'right';
+            for (let y = 0; y <= yMaxVal; y += 2) {
+                const pt = toCanvas(0, y, w, h);
+                ctx.beginPath();
+                ctx.moveTo(plotMargins.left, pt.y);
+                ctx.lineTo(w - plotMargins.right, pt.y);
+                ctx.stroke();
+                ctx.fillText(y, plotMargins.left - 10, pt.y + 3);
+            }
+
+            // Draw the underlying linear structures
+            if (showConstraints) {
+                // 1. Budget Line: 1500x + 4000y = 30000
+                ctx.strokeStyle = '#3b82f6';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                const b1 = toCanvas(0, 7.5, w, h);
+                const b2 = toCanvas(20, 0, w, h);
+                ctx.moveTo(b1.x, b1.y);
+                ctx.lineTo(b2.x, b2.y);
+                ctx.stroke();
+
+                // 2. Labor Line: 2.25x + 5y = 28
+                ctx.strokeStyle = '#10b981';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                const l1 = toCanvas(0, 5.6, w, h);
+                const l2 = toCanvas(28/2.25, 0, w, h);
+                ctx.moveTo(l1.x, l1.y);
+                ctx.lineTo(l2.x, l2.y);
+                ctx.stroke();
+
+                // 3. Ratio Presence Line: x = y
+                ctx.strokeStyle = '#8b5cf6';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                const r1 = toCanvas(0, 0, w, h);
+                const r2 = toCanvas(12, 12, w, h);
+                ctx.moveTo(r1.x, r1.y);
+                ctx.lineTo(r2.x, r2.y);
+                ctx.stroke();
+
+                // 4. Station Limit: y = 5
+                ctx.strokeStyle = '#f97316';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                const s1 = toCanvas(0, 5, w, h);
+                const s2 = toCanvas(xMaxVal, 5, w, h);
+                ctx.moveTo(s1.x, s1.y);
+                ctx.lineTo(s2.x, s2.y);
+                ctx.stroke();
+
+                // 5. Spam Limit: x = 12
+                ctx.strokeStyle = '#ec4899';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                const p1 = toCanvas(12, 0, w, h);
+                const p2 = toCanvas(12, yMaxVal, w, h);
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+            }
+
+            // Feasible Region Shading
+            const poly = calculateFeasibleVertices();
+            if (poly.length > 1 && showFeasible) {
+                ctx.beginPath();
+                const start = toCanvas(poly[0].x, poly[0].y, w, h);
+                ctx.moveTo(start.x, start.y);
+                for (let i = 1; i < poly.length; i++) {
+                    const node = toCanvas(poly[i].x, poly[i].y, w, h);
+                    ctx.lineTo(node.x, node.y);
+                }
+                ctx.closePath();
+                ctx.fillStyle = darkTheme ? 'rgba(99, 102, 241, 0.12)' : 'rgba(99, 102, 241, 0.08)';
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(99, 102, 241, 0.25)';
+                ctx.stroke();
+
+                // Dynamically look for any 'FEASIBLE' labeled notes
+                let hasFeasibleLabel = activeLabels.some(l => l.text.includes('FEASIBLE'));
+                if (!hasFeasibleLabel) {
+                    let cx = 0, cy = 0;
+                    poly.forEach(p => { cx += p.x; cy += p.y; });
+                    drawBoxedText("FEASIBLE CAMPAIGN REGION", cx/poly.length, cy/poly.length, darkTheme ? '#818cf8' : '#4f46e5', darkTheme ? 'rgba(49, 46, 129, 0.9)' : 'rgba(224, 231, 255, 0.95)', '#6366f1', '9px bold');
+                }
+            }
+
+            // 6. Q1.1 Reference Line (Z = 105,000)
+            if (showRef105) {
+                ctx.strokeStyle = '#eab308';
+                ctx.lineWidth = 1.2;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                const ref1 = toCanvas(0, 7, w, h);
+                const ref2 = toCanvas(13.125, 0, w, h);
+                ctx.moveTo(ref1.x, ref1.y);
+                ctx.lineTo(ref2.x, ref2.y);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            // 7. Q1.1 Optimal Line (Z = 141,000)
+            if (showReach11) {
+                // Equation: 8000x + 15000y = 141000. Corner (12,3)
+                ctx.strokeStyle = '#eab308';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                const opt1_1 = toCanvas(0, 9.4, w, h);
+                const opt1_2 = toCanvas(17.625, 0, w, h);
+                ctx.moveTo(opt1_1.x, opt1_1.y);
+                ctx.lineTo(opt1_2.x, opt1_2.y);
+                ctx.stroke();
+
+                // Marker dot at (12,3)
+                const optPt = toCanvas(12, 3, w, h);
+                ctx.fillStyle = '#eab308';
+                ctx.beginPath();
+                ctx.arc(optPt.x, optPt.y, 6, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            // 8. Q1.2 Optimal Line (Z = 112,500)
+            if (showReach12) {
+                // Equation: 5625x + 15000y = 112500 (Overlaps budget line!)
+                ctx.strokeStyle = '#14b8a6';
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                const opt2_1 = toCanvas(6.6667, 5, w, h);
+                const opt2_2 = toCanvas(12, 3, w, h);
+                ctx.moveTo(opt2_1.x, opt2_1.y);
+                ctx.lineTo(opt2_2.x, opt2_2.y);
+                ctx.stroke();
+
+                // Dots at both ends representing parallel optimal solutions
+                const cap1 = toCanvas(6.6667, 5, w, h);
+                const cap2 = toCanvas(12, 3, w, h);
+                ctx.fillStyle = '#14b8a6';
+                ctx.beginPath();
+                ctx.arc(cap1.x, cap1.y, 5, 0, 2 * Math.PI);
+                ctx.arc(cap2.x, cap2.y, 5, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+
+            // 9. Q1.3 Optimal Line (Z = 297,000)
+            if (showReach13) {
+                // Equation: 21000x + 15000y = 297000. Corner (12,3)
+                ctx.strokeStyle = '#f43f5e';
+                ctx.lineWidth = 2.5;
+                ctx.beginPath();
+                const opt3_1 = toCanvas(0, 19.8, w, h);
+                const opt3_2 = toCanvas(14.14, 0, w, h);
+                ctx.moveTo(opt3_1.x, opt3_1.y);
+                ctx.lineTo(opt3_2.x, opt3_2.y);
+                ctx.stroke();
+
+                const optPt = toCanvas(12, 3, w, h);
+                ctx.fillStyle = '#f43f5e';
+                ctx.beginPath();
+                ctx.arc(optPt.x, optPt.y, 6, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            // Draw Dynamic Active Labels Array
+            activeLabels.forEach(lbl => {
+                // Determine whether we should draw the label's parent layer
+                let drawLabel = true;
+                if (lbl.layer === 'constraints' && !showConstraints) drawLabel = false;
+                if (lbl.layer === 'ref105' && !showRef105) drawLabel = false;
+                if (lbl.layer === 'reach11' && !showReach11) drawLabel = false;
+                if (lbl.layer === 'reach12' && !showReach12) drawLabel = false;
+                if (lbl.layer === 'reach13' && !showReach13) drawLabel = false;
+
+                if (drawLabel) {
+                    const isSelected = selectedLabelId === lbl.id;
+                    drawBoxedText(lbl.text, lbl.x, lbl.y, lbl.color, labelBgColor, labelBorderColor, '9px', isSelected);
+                }
+            });
+
+            // Axis Painting
+            ctx.strokeStyle = axisColor;
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(plotMargins.left, h - plotMargins.bottom);
+            ctx.lineTo(w - plotMargins.right, h - plotMargins.bottom);
+            ctx.moveTo(plotMargins.left, plotMargins.top);
+            ctx.lineTo(plotMargins.left, h - plotMargins.bottom);
+            ctx.stroke();
+
+            // Axis Title Text labels
+            ctx.fillStyle = titleTextColor;
+            ctx.font = 'bold 11px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText("Social Media Posts (Posts, x)", plotMargins.left + (w - plotMargins.left - plotMargins.right) / 2, h - 15);
+            
+            ctx.save();
+            ctx.translate(15, plotMargins.top + (h - plotMargins.top - plotMargins.bottom) / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText("Radio Advertisements (Ads, y)", 0, 0);
+            ctx.restore();
+
+            renderCanvasLegend(ctx, w, h, darkTheme);
+        }
+
+        // Draw structural legend inside exported Canvas
+        function renderCanvasLegend(ctx, w, h, darkTheme) {
+            const legendX = w - 195;
+            const legendY = plotMargins.top + 5;
+            
+            ctx.fillStyle = darkTheme ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.96)';
+            ctx.strokeStyle = darkTheme ? '#334155' : '#cbd5e1';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.roundRect(legendX, legendY, 180, 155, 8);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.font = 'bold 9px "JetBrains Mono", monospace';
+            ctx.fillStyle = darkTheme ? '#ffffff' : '#0f172a';
+            ctx.textAlign = 'left';
+            ctx.fillText("MAP COLOR CODES:", legendX + 10, legendY + 15);
+
+            const items = [
+                { color: '#3b82f6', label: 'Budget Line (3x + 8y = 60)' },
+                { color: '#10b981', label: 'Labor (2.25x + 5y = 28)' },
+                { color: '#8b5cf6', label: 'Brand Ratio (x = y)' },
+                { color: '#f97316', label: 'Radio Cap (y <= 5)' },
+                { color: '#ec4899', label: 'Social Cap (x <= 12)' },
+                { color: '#eab308', label: 'Q1.1 Opt: (12, 3) Z=141k' },
+                { color: '#14b8a6', label: 'Q1.2 Opt: Segment Z=112.5k' },
+                { color: '#f43f5e', label: 'Q1.3 Opt: (12, 3) Z=297k' }
+            ];
+
+            items.forEach((item, idx) => {
+                const yOffset = legendY + 30 + idx * 15;
+                ctx.fillStyle = item.color;
+                ctx.fillRect(legendX + 10, yOffset - 7, 12, 7);
+                
+                ctx.font = '8px "JetBrains Mono", monospace';
+                ctx.fillStyle = darkTheme ? '#cbd5e1' : '#475569';
+                ctx.fillText(item.label, legendX + 28, yOffset - 1);
+            });
+        }
+
+        // Setup mouse & touch interactions, detection of clicks on existing labels
+        function setupCanvasInteraction() {
+            function updateHUD(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.clientX - rect.left;
+                const clientY = e.clientY - rect.top;
+
+                const coords = toMathCoords(clientX, clientY, rect.width, rect.height);
+                
+                if (coords.x >= 0 && coords.x <= xMaxVal && coords.y >= 0 && coords.y <= yMaxVal) {
+                    hoverCoords = coords;
+
+                    const x = parseFloat(coords.x.toFixed(2));
+                    const y = parseFloat(coords.y.toFixed(2));
+                    
+                    const budget = (config.costPost * x + config.costRadio * y).toLocaleString();
+                    const labor = (config.hoursPost * x + config.hoursRadio * y).toFixed(1);
+                    
+                    const reach1 = Math.round(8000 * x + 15000 * y).toLocaleString();
+                    const reach2 = Math.round(5625 * x + 15000 * y).toLocaleString();
+                    const reach3 = Math.round(21000 * x + 15000 * y).toLocaleString();
+
+                    const isFeasible = 
+                        (config.costPost * x + config.costRadio * y) <= config.budgetTotal + 0.1 &&
+                        (config.hoursPost * x + config.hoursRadio * y) >= config.minHours - 0.1 &&
+                        x >= y - 0.1 &&
+                        y <= config.maxRadio + 0.1 &&
+                        x <= config.maxPost + 0.1;
+
+                    document.getElementById('hud-x').innerText = x.toFixed(1);
+                    document.getElementById('hud-y').innerText = y.toFixed(1);
+                    document.getElementById('hud-budget').innerText = `R${budget}`;
+                    document.getElementById('hud-labor').innerText = `${labor} hrs`;
+                    document.getElementById('hud-reach1').innerText = `${reach1}`;
+                    document.getElementById('hud-reach2').innerText = `${reach2}`;
+                    document.getElementById('hud-reach3').innerText = `${reach3}`;
+                    
+                    const statusEl = document.getElementById('hud-status');
+                    if (isFeasible) {
+                        statusEl.innerText = 'FEASIBLE';
+                        statusEl.className = 'px-1.5 py-0.2 rounded font-bold uppercase text-[9px] bg-emerald-500/20 text-emerald-400';
+                    } else {
+                        statusEl.innerText = 'INVALID';
+                        statusEl.className = 'px-1.5 py-0.2 rounded font-bold uppercase text-[9px] bg-rose-500/20 text-rose-400';
+                    }
+                }
+            }
+
+            // Click listener: Selects a label if clicked near it, otherwise allows adding a label
+            canvas.addEventListener('click', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.clientX - rect.left;
+                const clientY = e.clientY - rect.top;
+                const clickCoords = toMathCoords(clientX, clientY, rect.width, rect.height);
+
+                // Find the closest drawn label (within threshold distance)
+                let clickedLabel = null;
+                let minDistance = 0.8; // threshold in coordinate system units
+
+                activeLabels.forEach(lbl => {
+                    const dist = Math.hypot(lbl.x - clickCoords.x, lbl.y - clickCoords.y);
+                    if (dist < minDistance) {
+                        minDistance = dist;
+                        clickedLabel = lbl;
+                    }
+                });
+
+                if (clickedLabel) {
+                    // Selected an existing label
+                    openQuickEditor(clickedLabel);
+                } else {
+                    // Clicked on empty space: Suggest adding a label here
+                    openQuickAdd(clickCoords.x, clickCoords.y);
+                }
+            });
+
+            canvas.addEventListener('mousemove', updateHUD);
+            canvas.addEventListener('touchmove', (e) => {
+                if (e.touches.length > 0) {
+                    const touch = e.touches[0];
+                    updateHUD(touch);
+                }
+            }, { passive: true });
+        }
+
+        // Open quick operations widget for editing
+        function openQuickEditor(labelObj) {
+            selectedLabelId = labelObj.id;
+            drawPlot();
+
+            // Populate modal inputs
+            document.getElementById('modal-title').innerText = "Edit Selected Label";
+            document.getElementById('modal-text').value = labelObj.text;
+            document.getElementById('modal-x').value = labelObj.x.toFixed(1);
+            document.getElementById('modal-y').value = labelObj.y.toFixed(1);
+            document.getElementById('modal-color').value = fixHexColor(labelObj.color);
+            document.getElementById('modal-delete-btn').style.display = 'block';
+
+            // Show customizer tab too
+            switchTab('labels');
+            highlightLabelInList(labelObj.id);
+
+            // Pop modal
+            const modal = document.getElementById('quick-editor-modal');
+            modal.classList.remove('hidden');
+        }
+
+        // Open widget for adding a brand new label at the clicked location
+        function openQuickAdd(x, y) {
+            selectedLabelId = null;
+            drawPlot();
+
+            document.getElementById('modal-title').innerText = "Add Custom Label";
+            document.getElementById('modal-text').value = "Custom Note";
+            document.getElementById('modal-x').value = x.toFixed(1);
+            document.getElementById('modal-y').value = y.toFixed(1);
+            document.getElementById('modal-color').value = '#6366f1';
+            document.getElementById('modal-delete-btn').style.display = 'none';
+
+            const modal = document.getElementById('quick-editor-modal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeQuickEditor() {
+            const modal = document.getElementById('quick-editor-modal');
+            modal.classList.add('hidden');
+            selectedLabelId = null;
+            drawPlot();
+        }
+
+        function saveQuickEditor() {
+            const text = document.getElementById('modal-text').value.trim();
+            const x = parseFloat(document.getElementById('modal-x').value) || 0;
+            const y = parseFloat(document.getElementById('modal-y').value) || 0;
+            const color = document.getElementById('modal-color').value;
+
+            if (!text) return;
+
+            if (selectedLabelId) {
+                // Editing existing
+                const index = activeLabels.findIndex(l => l.id === selectedLabelId);
+                if (index !== -1) {
+                    activeLabels[index].text = text;
+                    activeLabels[index].x = x;
+                    activeLabels[index].y = y;
+                    activeLabels[index].color = color;
+                }
+            } else {
+                // Adding a brand new one
+                const newId = 'custom-' + Date.now();
+                activeLabels.push({
+                    id: newId,
+                    text: text,
+                    x: x,
+                    y: y,
+                    color: color,
+                    layer: 'constraints'
+                });
+            }
+
+            closeQuickEditor();
+            renderLabelsControlPanel();
+            drawPlot();
+        }
+
+        function deleteActiveLabel() {
+            if (selectedLabelId) {
+                activeLabels = activeLabels.filter(l => l.id !== selectedLabelId);
+                closeQuickEditor();
+                renderLabelsControlPanel();
+                drawPlot();
+            }
+        }
+
+        function addNewCustomLabel() {
+            openQuickAdd(8.0, 6.0);
+        }
+
+        // Restore all default labels back to initial state
+        function restoreDefaultLabels() {
+            activeLabels = JSON.parse(JSON.stringify(INITIAL_LABELS));
+            closeQuickEditor();
+            renderLabelsControlPanel();
+            drawPlot();
+        }
+
+        // Helper to turn color names or invalid hex strings into true webhex code
+        function fixHexColor(col) {
+            if (col.startsWith('#')) return col;
+            const colors = {
+                blue: '#3b82f6',
+                emerald: '#10b981',
+                purple: '#8b5cf6',
+                orange: '#f97316',
+                pink: '#ec4899',
+                yellow: '#eab308',
+                teal: '#14b8a6',
+                red: '#f43f5e'
+            };
+            return colors[col] || '#ffffff';
+        }
+
+        // Active state of right side panels (Consolidated calculations vs. Label customizer lists)
+        function switchTab(tabName) {
+            const calcBtn = document.getElementById('tab-btn-calculations');
+            const lblBtn = document.getElementById('tab-btn-labels');
+            const calcContent = document.getElementById('tab-content-calculations');
+            const lblContent = document.getElementById('tab-content-labels');
+
+            if (tabName === 'calculations') {
+                calcBtn.classList.add('border-indigo-500', 'text-white');
+                calcBtn.classList.remove('border-transparent', 'text-slate-400');
+                lblBtn.classList.add('border-transparent', 'text-slate-400');
+                lblBtn.classList.remove('border-indigo-500', 'text-white');
+
+                calcContent.classList.remove('hidden');
+                lblContent.classList.add('hidden');
+            } else {
+                lblBtn.classList.add('border-indigo-500', 'text-white');
+                lblBtn.classList.remove('border-transparent', 'text-slate-400');
+                calcBtn.classList.add('border-transparent', 'text-slate-400');
+                calcBtn.classList.remove('border-indigo-500', 'text-white');
+
+                lblContent.classList.remove('hidden');
+                calcContent.classList.add('hidden');
+            }
+        }
+
+        // Render Sidebar interactive list of custom labels
+        function renderLabelsControlPanel() {
+            const listContainer = document.getElementById('labels-panel-list');
+            document.getElementById('labels-count').innerText = activeLabels.length;
+            listContainer.innerHTML = '';
+
+            if (activeLabels.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800">
+                        <i data-lucide="tag" class="w-8 h-8 text-slate-600 mx-auto mb-2"></i>
+                        <p class="text-xs text-slate-400">No active custom tags. Click customizer buttons or click on the grid to assign some!</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            activeLabels.forEach(lbl => {
+                const isSelected = selectedLabelId === lbl.id;
+                const row = document.createElement('div');
+                row.id = `label-row-${lbl.id}`;
+                row.className = `p-3 rounded-lg border transition ${isSelected ? 'bg-indigo-950/40 border-indigo-500/50' : 'bg-slate-900/30 border-slate-800/80 hover:border-slate-700'}`;
+                row.innerHTML = `
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <span class="w-2.5 h-2.5 rounded" style="background-color: ${fixHexColor(lbl.color)}"></span>
+                        <input type="text" value="${lbl.text}" onchange="updateLabelText('${lbl.id}', this.value)" class="flex-1 bg-slate-950/80 border border-slate-800 focus:border-indigo-500 rounded px-1.5 py-0.5 text-xs text-white focus:outline-none">
+                        <button onclick="deleteLabelFromList('${lbl.id}')" class="text-slate-400 hover:text-red-400 transition" title="Delete Label"><i data-lucide="trash" class="w-3.5 h-3.5"></i></button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-[10px]">
+                        <div class="flex items-center gap-1">
+                            <span class="text-slate-500">X:</span>
+                            <input type="number" step="0.1" value="${lbl.x}" onchange="updateLabelCoords('${lbl.id}', parseFloat(this.value), null)" class="w-12 bg-slate-950/80 border border-slate-800 text-slate-300 rounded px-1 text-center">
+                            <span class="text-slate-500">Y:</span>
+                            <input type="number" step="0.1" value="${lbl.y}" onchange="updateLabelCoords('${lbl.id}', null, parseFloat(this.value))" class="w-12 bg-slate-950/80 border border-slate-800 text-slate-300 rounded px-1 text-center">
+                        </div>
+                        <div class="flex items-center justify-end gap-1">
+                            <span class="text-slate-500">Color:</span>
+                            <input type="color" value="${fixHexColor(lbl.color)}" onchange="updateLabelColor('${lbl.id}', this.value)" class="w-6 h-4 border border-slate-800 cursor-pointer p-0">
+                            <button onclick="selectLabelOnCanvas('${lbl.id}')" class="px-1.5 py-0.5 bg-indigo-900/40 hover:bg-indigo-900 text-[9px] text-indigo-300 rounded border border-indigo-700/30">Locate</button>
+                        </div>
+                    </div>
+                `;
+                listContainer.appendChild(row);
+            });
+
+            lucide.createIcons();
+        }
+
+        // Real-time operations from sidebar input changes
+        function updateLabelText(id, val) {
+            const idx = activeLabels.findIndex(l => l.id === id);
+            if (idx !== -1) {
+                activeLabels[idx].text = val;
+                drawPlot();
+            }
+        }
+
+        function updateLabelCoords(id, nx, ny) {
+            const idx = activeLabels.findIndex(l => l.id === id);
+            if (idx !== -1) {
+                if (nx !== null && !isNaN(nx)) activeLabels[idx].x = nx;
+                if (ny !== null && !isNaN(ny)) activeLabels[idx].y = ny;
+                drawPlot();
+            }
+        }
+
+        function updateLabelColor(id, col) {
+            const idx = activeLabels.findIndex(l => l.id === id);
+            if (idx !== -1) {
+                activeLabels[idx].color = col;
+                drawPlot();
+                renderLabelsControlPanel();
+            }
+        }
+
+        function deleteLabelFromList(id) {
+            activeLabels = activeLabels.filter(l => l.id !== id);
+            if (selectedLabelId === id) closeQuickEditor();
+            renderLabelsControlPanel();
+            drawPlot();
+        }
+
+        function selectLabelOnCanvas(id) {
+            const lbl = activeLabels.find(l => l.id === id);
+            if (lbl) {
+                openQuickEditor(lbl);
+            }
+        }
+
+        function highlightLabelInList(id) {
+            // Scroll selected row into view
+            setTimeout(() => {
+                const targetRow = document.getElementById(`label-row-${id}`);
+                if (targetRow) {
+                    targetRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 50);
+        }
+
+        function copySection(elementId) {
+            const range = document.createRange();
+            range.selectNode(document.getElementById(elementId));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error('Clipboard failed', err);
+            }
+            window.getSelection().removeAllRanges();
+        }
+
+        // PNG downloader helper
+        function downloadGraph() {
+            const prevTheme = config.theme;
+            config.theme = 'light';
+            drawPlot();
+
+            const image = canvas.toDataURL("image/png");
+            const link = document.createElement('a');
+            link.download = 'All_In_One_Marketing_LP_Optimization_Plot.png';
+            link.href = image;
+            link.click();
+
+            config.theme = prevTheme;
+            drawPlot();
+        }
+    </script>
+</body>
+</html>
